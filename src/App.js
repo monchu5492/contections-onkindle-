@@ -16,7 +16,6 @@ export default class App extends React.Component {
         newSignup: false,
         
         user: null,
-
         // user: { 
         // id: 1,
         // user_name: "monchu1",
