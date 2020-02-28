@@ -1,62 +1,99 @@
-import React, { Component } from 'react'
-import { Menu, Segment } from 'semantic-ui-react'
-import {Link} from "react-router-dom"
+import React, { Component } from "react";
+// import { Menu, Segment, Image } from "semantic-ui-react";
+// import { Link } from "react-router-dom";
+import ProfileTop from "./ProfileTop";
+import ProfileBottom from "./ProfileBottom";
+import CreateEventForm from "./CreateEventForm";
+
+const eventsURL = "http://localhost:3000/events";
 
 export default class MenuExampleSecondaryPointing extends Component {
-  state = { activeItem: 'home' }
+  state = {
+    currentUserEvents: this.props.user.events
+  };
+  // state = { activeItem: "home" };
 
-  componentDidMount = () => {console.log(this.props.user)}
+  // handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
-  currentUser = () => this.props.user 
+  // handleLogOut = () => {
+  // if (window.confirm("Are you sure you want to logout?") === true) {
+  //     return <Link to="/" />;
+  //   }
+  // };
+  //
+  postEvent = event => {
+    // console.log(this.localUser())
+    fetch(eventsURL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        event: { ...event, user_id: this.props.user.id }
+      })
+    })
+      .then(res => res.json())
+      .then(event => console.log("posted..?"));
+    // this.setState({...this.state, currentUserPets: this.state.currentUserPets.push(event)}))
+  };
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  updateEvent = event => {
+    fetch(eventsURL, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        event: { ...event, user_id: this.props.user.id }
+      })
+    })
+      .then(res => res.json())
+      .then(data => console.log("hope this works"));
+  };
 
-  handleLogOut = () => {
-  if (window.confirm("Are you sure you want to logout?" == true)) {
-    return (<Link to='/'/>)
-  } else {
-    alert("Save Canceled!")
-  }
-  }
-    
-//   handleLogOut = () => {(alert("Save Canceled!")
-//     confirm("Do you want to logout?") ? (<Redirect to='/'/>) : 
-//   }
-  
+  deleteEvent = deletedEvent => {
+    console.log(deletedEvent);
+    let keptEvents = this.state.currentUserEvents.filter(
+      event => event.id != deletedEvent.id
+    )[0];
+    this.setState({
+      currentUserEvents: keptEvents
+    });
+    fetch(`http://localhost:3000/events/${deletedEvent.id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        console.log("deleted event");
+      });
+  };
+
   render() {
-    const { activeItem } = this.state
+    console.log(this.state.currentUserEvents);
+    // const { activeItem } = this.state;
     return (
       <div>
-    <Segment>
-      <img src='https://randomuser.me/api/portraits/lego/8.jpg' alt='none'  />
-    </Segment>
-        <Menu pointing secondary>
-        <Link to='/'>
-          <Menu.Item
-            name='home'
-            active={activeItem === 'home'}
-            onClick={this.handleItemClick}
-          />
-        </Link>
-          <Menu.Item
-            name='messages'
-            active={activeItem === 'messages'}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name='friends'
-            active={activeItem === 'friends'}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Menu position='right'>
-            <Menu.Item
-              name='logout'
-              active={activeItem === 'logout'}
-              onClick={(this.handleItemClick, this.handleLogOut)}
-            />
-          </Menu.Menu>
-        </Menu>
+        {console.log(this.props)}
+        <ProfileTop
+          user={this.props.user}
+          localUser={this.props.localUser}
+          postEvent={this.postEvent}
+          deleteEvent={this.deleteEvent}
+          updateEvent={this.updateEvent}
+        />
+        <ProfileBottom
+          user={this.props.user}
+          localUser={this.props.localUser}
+          logOut={this.props.logOut}
+          deleteEvent={this.deleteEvent}
+        />
       </div>
-    )
+    );
   }
 }

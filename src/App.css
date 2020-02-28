@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+.ui.cards.event-group {
+  width: 110%;
+  margin: auto;
+}
+div.ui.card {
+  display: inline-block;
+}
+.event-wrapper {
+  width: max-content;
+  margin: auto;
+}
