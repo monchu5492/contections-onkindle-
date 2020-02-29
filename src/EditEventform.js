@@ -1,13 +1,15 @@
 import React from "react";
 import { Button, Modal } from "semantic-ui-react";
+import RemoveEventModal from "./RemoveEventModal";
 // Form, Header, Image,
 const INITIAL_STATE = {
+  id: null,
   name: "",
   picture: "",
   links: "",
   description: "",
   address: "",
-  user: []
+  user: null
   //    owner_id: ""
 };
 export default class CreateEventForm extends React.Component {
@@ -26,7 +28,7 @@ export default class CreateEventForm extends React.Component {
     // debugger;
     e.preventDefault();
     this.close();
-    this.props.updateEvent(this.state);
+    this.props.updateEvent(this.state, this.props.currentEvent);
     this.setState(INITIAL_STATE);
   };
   render() {
@@ -34,7 +36,11 @@ export default class CreateEventForm extends React.Component {
     const { open, closeOnEscape, closeOnDimmerClick } = this.state;
     return (
       <div>
-        <Button onClick={this.closeConfigShow(false, true)} color="grey">
+        <Button
+          onClick={this.closeConfigShow(false, true)}
+          color="blue"
+          inverted
+        >
           Edit an Event
         </Button>
         <Modal
@@ -110,6 +116,13 @@ export default class CreateEventForm extends React.Component {
               labelPosition="right"
               icon="checkmark"
               content="Submit"
+            />
+            <RemoveEventModal
+              labelPosition="left"
+              user={this.props.user}
+              currentEvent={this.props.currentEvent}
+              deleteEvent={this.props.deleteEvent}
+              closeFirstModal={this.close}
             />
           </Modal.Actions>
         </Modal>

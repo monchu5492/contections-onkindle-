@@ -32,11 +32,6 @@ export default class MenuExampleSecondaryPointing extends Component {
       ...this.state,
       modalOpen: false
     });
-    // if (e.target.innertext === yes) {
-    //   this.props.deleteEvent()
-    // } else {
-
-    // }
   };
 
   handleChange = e => {
@@ -68,35 +63,6 @@ export default class MenuExampleSecondaryPointing extends Component {
             user={this.props.user}
             postEvent={this.props.postEvent}
           />
-          <Modal
-            trigger={
-              <Button onClick={this.handleOpen} color="red" inverted>
-                Remove Event
-              </Button>
-            }
-            open={this.state.modalOpen}
-            onClose={this.handleClose}
-            basic
-            size="small"
-          >
-            <Header icon="browser" content="Cookies policy" />
-            <Modal.Content>
-              <h3>Are you sure you would like to remove this Event?</h3>
-            </Modal.Content>
-            <Modal.Actions>
-              <Button color="green" onClick={this.handleClose} inverted>
-                <Icon name="checkmark" /> Yes
-              </Button>
-              <Button color="red" onClick={this.handleClose} inverted>
-                No
-              </Button>
-            </Modal.Actions>
-          </Modal>
-          <EditEventForm
-            style={{ position: "left" }}
-            user={this.props.user}
-            updateEvent={this.props.updateEvent}
-          />
           <h2 style={{ width: "max-content", margin: "auto" }}>
             {this.props.user
               ? this.props.user.name
@@ -107,32 +73,3 @@ export default class MenuExampleSecondaryPointing extends Component {
     );
   }
 }
-
-// state = { modalOpen: false }
-
-//   handleOpen = () => this.setState({ modalOpen: true })
-
-//   handleClose = () => this.setState({ modalOpen: false })
-
-//   render() {
-//     return (
-//       <Modal
-//         trigger={<Button onClick={this.handleOpen}>Show Modal</Button>}
-//         open={this.state.modalOpen}
-//         onClose={this.handleClose}
-//         basic
-//         size='small'
-//       >
-//         <Header icon='browser' content='Cookies policy' />
-//         <Modal.Content>
-//           <h3>This website uses cookies to ensure the best user experience.</h3>
-//         </Modal.Content>
-//         <Modal.Actions>
-//           <Button color='green' onClick={this.handleClose} inverted>
-//             <Icon name='checkmark' /> Got it
-//           </Button>
-//         </Modal.Actions>
-//       </Modal>
-//     )
-//   }
-// }

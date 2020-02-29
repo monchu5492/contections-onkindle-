@@ -8,16 +8,15 @@ export default class CreateEventForm extends React.Component {
   closeConfigShow = (closeOnEscape, closeOnDimmerClick) => () => {
     this.setState({ closeOnEscape, closeOnDimmerClick, open: true });
   };
-  close = () => (
-    this.setState({ open: false }), console.log(this.props.event.event)
-  );
+  close = () => (this.setState({ open: false }), console.log(this.props));
   //-------------------------------------------
-
   handleOnClick = e => {
     // debugger;
-    e.preventDefault();
-
-    this.props.deleteEvent(this.props.event.event);
+    console.log(this.props.currentEvent);
+    this.props.closeFirstModal();
+    this.props.deleteEvent(this.props.currentEvent);
+    console.log(this.props);
+    // console.log(this.props.event.event);
     this.close();
     // console.log(this.props.event.event.id);
   };

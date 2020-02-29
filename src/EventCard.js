@@ -1,8 +1,7 @@
 import React from "react";
 import { Button, Card, Image, Modal } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import RemoveEventModoal from "./RemoveEventModal";
-
+import EditEventForm from "./EditEventform";
 // , margin: "auto"
 // style={{ width: "max-content" }}
 export default class CardExampleGroups extends React.Component {
@@ -11,20 +10,21 @@ export default class CardExampleGroups extends React.Component {
   };
 
   render() {
-    console.log("what it do");
     return (
       <Card>
-        {console.log(this.props, "event card props")}
+        {console.log(this.props.currentEvent, "currentEvent card props")}
         <Card.Content>
           <Image
             floated="right"
             size="mini"
-            src="https://react.semantic-ui.com/images/avatar/large/steve.jpg"
+            src={this.props.currentEvent.picture}
           />
-          <Card.Header>Steve Sanders</Card.Header>
-          <Card.Meta>Friends of Elliot</Card.Meta>
+          <Card.Header>
+            Event Created By {this.props.user.user_name}
+          </Card.Header>
+          <Card.Meta>{this.props.currentEvent.name} project</Card.Meta>
           <Card.Description>
-            Steve wants to add you to the group <strong>best friends</strong>
+            <Link>{this.props.user.links}</Link>
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
@@ -42,10 +42,12 @@ export default class CardExampleGroups extends React.Component {
                 { key: "done", content: "Done", positive: true }
               ]}
             />
-            <RemoveEventModoal
-              event={this.props}
+            <EditEventForm
+              style={{ position: "left" }}
+              user={this.props.user}
+              updateEvent={this.props.updateEvent}
               deleteEvent={this.props.deleteEvent}
-              currentUserEvents={this.props.currentUserEvents}
+              currentEvent={this.props.currentEvent}
             />
           </div>
         </Card.Content>

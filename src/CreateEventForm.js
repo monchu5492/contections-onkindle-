@@ -26,6 +26,7 @@ export default class CreateEventForm extends React.Component {
     // debugger;
     e.preventDefault();
     this.close();
+    console.log(this.state);
     this.props.postEvent(this.state);
     this.setState(INITIAL_STATE);
   };

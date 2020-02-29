@@ -9,7 +9,7 @@ import HomepageLayout from "./HomepageLayout";
 export default class MenuExampleTabularOnTop extends Component {
   state = {
     activeItem: "bio",
-    currentUserEvents: this.props.user.events
+    currentUserEvents: []
   };
 
   handleItemClick = (e, { name }) => {
@@ -28,18 +28,6 @@ export default class MenuExampleTabularOnTop extends Component {
       localStorage.clear();
       return this.props.logOut();
       //supposed to redirect to home page as well as removing user from local state
-    }
-  };
-
-  showCards = () => {
-    if (this.props.user) {
-      this.props.user.events.map(event => {
-        return <EventCard event={event} />;
-      });
-    } else {
-      this.props.localUser().events.map(event => {
-        return <EventCard event={event} />;
-      });
     }
   };
 
@@ -79,12 +67,15 @@ export default class MenuExampleTabularOnTop extends Component {
         </Menu>
         <Segment attached="bottom">
           {this.state.activeItem === "events" ? (
-            this.props.user.events ? (
-              this.props.user.events.map(event => {
+            this.props.owned_events.length >= 1 ? (
+              this.props.owned_events.map(event => {
                 return (
                   <EventCard
-                    event={event}
+                    user={this.props.user}
+                    owned_events={this.props.owned_events}
+                    currentEvent={event}
                     deleteEvent={this.props.deleteEvent}
+                    updateEvent={this.props.updateEvent}
                   />
                 );
               })
@@ -92,7 +83,7 @@ export default class MenuExampleTabularOnTop extends Component {
               <h2>Currently no events, feel free to create one</h2>
             )
           ) : (
-            <h4>
+            <h4 style={{ width: "max-content" }}>
               {this.props.user
                 ? this.props.user.bio
                 : this.props.localUser().bio}
