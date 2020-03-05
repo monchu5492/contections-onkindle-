@@ -89,11 +89,14 @@ class DesktopContainer extends Component {
           <Segment
             inverted
             textAlign="center"
-            style={{ minHeight: 700, padding: "1em 0em" }}
+            style={{
+              minHeight: 700,
+              padding: "1em 0em"
+            }}
             vertical
           >
             <Menu
-              fixed={fixed ? "top" : null}
+              // fixed={fixed ? "top" : null}
               inverted={!fixed}
               pointing={!fixed}
               secondary={!fixed}
@@ -183,7 +186,10 @@ class MobileContainer extends Component {
           <Segment
             inverted
             textAlign="center"
-            style={{ minHeight: 350, padding: "1em 0em" }}
+            style={{
+              minHeight: 350,
+              padding: "1em 0em"
+            }}
             vertical
           >
             <Container>
@@ -258,7 +264,9 @@ const HomepageLayout = () => (
               bordered
               rounded
               size="large"
-              src="/images/wireframe/white-image.png"
+              src={
+                "https://cdn.pixabay.com/photo/2020/02/25/09/25/connection-technology-4878379_960_720.png"
+              }
             />
           </Grid.Column>
         </Grid.Row>
@@ -270,7 +278,7 @@ const HomepageLayout = () => (
       </Grid>
     </Segment>
 
-    <Segment style={{ padding: "0em" }} vertical>
+    {/* <Segment style={{ padding: "0em" }} vertical>
       <Grid celled="internally" columns="equal" stackable>
         <Grid.Row textAlign="center">
           <Grid.Column style={{ paddingBottom: "5em", paddingTop: "5em" }}>
@@ -292,9 +300,9 @@ const HomepageLayout = () => (
           </Grid.Column>
         </Grid.Row>
       </Grid>
-    </Segment>
+    </Segment> */}
 
-    <Segment style={{ padding: "8em 0em" }} vertical>
+    {/* <Segment style={{ padding: "8em 0em" }} vertical>
       <Container text>
         <Header as="h3" style={{ fontSize: "2em" }}>
           Breaking The Grid, Grabs Your Attention
@@ -330,7 +338,7 @@ const HomepageLayout = () => (
           I'm Still Quite Interested
         </Button>
       </Container>
-    </Segment>
+    </Segment> */}
 
     <Segment inverted vertical style={{ padding: "5em 0em" }}>
       <Container>

@@ -80,7 +80,7 @@ export default class CreateEventForm extends React.Component {
                 name="links"
                 value={this.state.links}
                 onChange={this.handleChange}
-                placeholder="Animal Type"
+                placeholder="links"
               />
             </div>
             <div className="field">

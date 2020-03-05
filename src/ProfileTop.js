@@ -47,12 +47,11 @@ export default class MenuExampleSecondaryPointing extends Component {
   render() {
     const open = this.state.modalOpen;
     // const { activeItem } = this.state;
-
     return (
       <div>
         <Segment>
           <Image
-            src="https://randomuser.me/api/portraits/lego/8.jpg"
+            src={this.props.user.profile_pic}
             alt="none"
             size="medium"
             style={{ width: "max-content", margin: "auto" }}
@@ -64,9 +63,7 @@ export default class MenuExampleSecondaryPointing extends Component {
             postEvent={this.props.postEvent}
           />
           <h2 style={{ width: "max-content", margin: "auto" }}>
-            {this.props.user
-              ? this.props.user.name
-              : this.props.localUser().name}
+            {this.props.user ? this.props.user.name : "currently no user"}
           </h2>
         </Segment>
       </div>

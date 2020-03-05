@@ -12,7 +12,7 @@ export default class MenuExampleSecondaryPointing extends Component {
     // const { activeItem } = this.state;
     return (
       <div>
-        {console.log(this.props.owned_events)}
+        {console.log(this.props.users)}
         <ProfileTop
           user={this.props.user}
           localUser={this.props.localUser}
@@ -20,12 +20,15 @@ export default class MenuExampleSecondaryPointing extends Component {
         />
         <ProfileBottom
           user={this.props.user}
+          users={this.props.users}
           owned_events={this.props.owned_events}
-          localUser={this.props.localUser}
+          history={this.props.history}
           logOut={this.props.logOut}
           deleteEvent={this.props.deleteEvent}
           currentUserEvents={this.props.currentUserEvents}
           updateEvent={this.props.updateEvent}
+          joinEvent={this.props.joinEvent}
+          allEvents={this.props.allEvents}
         />
       </div>
     );

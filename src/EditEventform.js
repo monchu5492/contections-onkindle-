@@ -20,7 +20,7 @@ export default class CreateEventForm extends React.Component {
   };
   close = () => this.setState({ open: false });
   //-------------------------------------------
-  state = INITIAL_STATE;
+  state = { ...this.props.currentEvent };
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -61,7 +61,7 @@ export default class CreateEventForm extends React.Component {
                 name="name"
                 value={this.state.name}
                 onChange={this.handleChange}
-                placeholder="Name"
+                placeholder={this.props.currentEvent.name}
               />
             </div>
             <div className="field">
@@ -71,7 +71,7 @@ export default class CreateEventForm extends React.Component {
                 name="picture"
                 value={this.state.picture}
                 onChange={this.handleChange}
-                placeholder="Image"
+                placeholder={this.props.currentEvent.picture}
               />
             </div>
             <div className="field">
@@ -81,7 +81,7 @@ export default class CreateEventForm extends React.Component {
                 name="links"
                 value={this.state.links}
                 onChange={this.handleChange}
-                placeholder="Animal Type"
+                placeholder={this.props.currentEvent.links}
               />
             </div>
             <div className="field">
@@ -91,7 +91,7 @@ export default class CreateEventForm extends React.Component {
                 name="description"
                 value={this.state.description}
                 onChange={this.handleChange}
-                placeholder="Description"
+                placeholder={this.props.currentEvent.description}
               />
             </div>
             <div className="field">
@@ -101,7 +101,7 @@ export default class CreateEventForm extends React.Component {
                 name="address"
                 value={this.state.address}
                 onChange={this.handleChange}
-                placeholder="Address"
+                placeholder={this.props.currentEvent.address}
               />
             </div>
             {/* <button type="submit" className="ui button">Submit</button> */}

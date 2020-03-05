@@ -22,7 +22,7 @@ class FormExampleSize extends React.Component {
   handleFormSubmit = e => {
     e.preventDefault();
     this.props.addUser(this.state);
-    this.setState(INITIAL_STATE);
+    this.props.history.push("/login");
   };
 
   render() {

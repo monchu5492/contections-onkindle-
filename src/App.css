@@ -48,3 +48,15 @@ div.ui.card {
   width: max-content;
   margin: auto;
 }
+
+.ui.inverted.vertical.center.aligned.segment {
+  background-image: url(https://cdn.pixabay.com/photo/2018/04/18/13/37/blue-3330475_960_720.png);
+  background-size: cover;
+  padding-top: 0px !important;
+}
+
+.ui.large.inverted.pointing.secondary.menu {
+  background-color: #1b1c1d;
+}
+
+/* #1b1c1d */
