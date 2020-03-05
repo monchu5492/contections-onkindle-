@@ -38,7 +38,7 @@ export default class CreateEventForm extends React.Component {
       <div>
         <Button
           onClick={this.closeConfigShow(false, true)}
-          color="blue"
+          color="twitter"
           inverted
         >
           Edit an Event

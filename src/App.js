@@ -48,6 +48,7 @@ export default class App extends React.Component {
   }
 
   getAllEvents() {
+    console.log("getting events");
     fetch(eventsURL, {
       headers: { Authorization: localStorage.getItem("token") }
     })
@@ -61,6 +62,7 @@ export default class App extends React.Component {
   }
 
   getAllUsers() {
+    console.log("getting all users");
     fetch(userURl, {
       headers: { Authorization: localStorage.getItem("token") }
     })
@@ -151,7 +153,7 @@ export default class App extends React.Component {
   // };
 
   updateEvent = (thisevent, cur_ev_from_props) => {
-    let theseEvents = this.state.owned_events.filter(
+    let theseEvents = this.state.allEvents.filter(
       event => event.id !== cur_ev_from_props.id
     );
     let newEvent = { ...thisevent, id: cur_ev_from_props.id };
@@ -166,7 +168,8 @@ export default class App extends React.Component {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json"
+        Accept: "application/json",
+        Authorization: localStorage.getItem("token")
       },
       body: JSON.stringify({
         event: thisevent
@@ -181,14 +184,17 @@ export default class App extends React.Component {
   deleteEvent = deletedEvent => {
     // console.log(deletedEvent);
     console.log("delete event function hit");
-    let nonDeletedEvents = this.state.owned_events.filter(
+    console.log(deletedEvent);
+    console.log(this.state.allEvents);
+    let nonDeletedEvents = this.state.allEvents.filter(
       event => event.id !== deletedEvent.id
     );
     console.log(nonDeletedEvents);
     fetch(`http://localhost:3000/events/${deletedEvent.id}`, {
       method: "DELETE",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("token")
       }
     })
       .then(res => res.json())
@@ -200,13 +206,9 @@ export default class App extends React.Component {
   };
 
   postEvent = event => {
-    // console.log(this.state.user.owned_events);
+    console.log(event);
 
-    let newUsersEvents = () => {
-      this.state.allEvents.push(event);
-      return this.state.allEvents;
-    };
-    // // console.log(this.user.events);
+    // console.log(newUsersEvents());
     fetch(eventsURL, {
       method: "POST",
       headers: {
@@ -219,10 +221,11 @@ export default class App extends React.Component {
       })
     })
       .then(res => res.json())
-      .then(
-        () => this.updateUsersEvents(newUsersEvents()),
-        console.log("posted event")
-      );
+      .then(data => {
+        let tmp = this.state.allEvents.slice();
+        tmp.push(data);
+        this.updateUsersEvents(tmp);
+      });
   };
 
   joinEvent = thisevent => {
@@ -239,11 +242,17 @@ export default class App extends React.Component {
       })
     })
       .then(res => res.json())
-      .then(data => console.log(data));
+      .then(data => {
+        thisevent.join_events.push({ id: data.id });
+        let tmp = this.state.allEvents.slice();
+        tmp.push(thisevent);
+        this.updateUsersEvents(tmp);
+      });
   };
-
+  // console.log(data, thisevent.join_events)
+  // this.this.setState({ ...this.state })
   updateUsersEvents = newUsersEvents => {
-    console.log(newUsersEvents);
+    console.log("new users events", newUsersEvents);
     this.setState({
       ...this.state,
       allEvents: newUsersEvents
@@ -284,30 +293,39 @@ export default class App extends React.Component {
   // };
 
   logout = () => {
-    localStorage.removeItem("token");
+    localStorage.clear();
     this.setState({ auth: { user: {} } });
   };
 
   render() {
-    console.log(this.state.users);
-    console.log(this.state.auth);
-    console.log(this.state.allEvents);
     return (
       <div>
-        {console.log("state at render (129)", this.state.auth.user)}
         <Router>
           <Switch>
-            {this.state.isLoggedIn === false ? (
-              <Route
-                path="/"
-                exact
-                render={() => (
-                  <HomepageLayout
-                    users={this.state.users}
-                    isLoggedIn={this.state.isLoggedIn}
-                  />
-                )}
-              />
+            {!this.state.auth.user ? (
+              ((
+                <Route
+                  path="/"
+                  exact
+                  render={() => (
+                    <HomepageLayout
+                      users={this.state.users}
+                      isLoggedIn={this.state.isLoggedIn}
+                    />
+                  )}
+                />
+              ),
+              (
+                <Route
+                  path="/profile"
+                  render={props => (
+                    <HomepageLayout
+                      users={this.state.users}
+                      isLoggedIn={this.state.isLoggedIn}
+                    />
+                  )}
+                />
+              ))
             ) : (
               <Route
                 path="/profile"
@@ -357,6 +375,7 @@ export default class App extends React.Component {
               exact
               render={() => <HomepageLayout users={this.state.users} />}
             />
+            {localStorage.length <= 0}
             <Route
               path="/profile"
               exact

@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Card, Image, Modal } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import EditEventForm from "./EditEventform";
 import JoinModalButton from "./JoinModalButton";
 // , margin: "auto"
@@ -37,9 +37,10 @@ export default class CardExampleGroups extends React.Component {
           </Card.Header>
           <Card.Meta>{this.props.currentEvent.name} project</Card.Meta>
           <Card.Description>
-            <Link to={this.props.currentEvent.links}>
-              {this.props.currentEvent.links}
-            </Link>
+            {/* <Link exact to={this.props.currentEvent.links}>
+              Link
+            </Link> */}
+            <a href={this.props.currentEvent.links}>event link</a>
             <p>{this.props.currentEvent.join_events.length}</p>
           </Card.Description>
         </Card.Content>

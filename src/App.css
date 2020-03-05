@@ -60,3 +60,73 @@ div.ui.card {
 }
 
 /* #1b1c1d */
+.ui.bottom.attached.segment {
+  min-height: calc(100vh - 157px);
+  background-image: linear-gradient(rgb(138, 248, 138), rgb(108, 163, 253));
+}
+img.ui.mini.right.floated.image {
+  border-radius: 5%;
+  width: 70px;
+}
+
+.ui.card > :first-child,
+.ui.cards > .card > :first-child {
+  background-color: rgb(76, 100, 167) !important;
+}
+
+.ui.card > .content > .header,
+.ui.cards > .card > .content > .header {
+  color: aquamarine !important;
+}
+
+.ui.card .meta,
+.ui.cards > .card .meta {
+  color: cyan !important;
+}
+
+.ui.card > .content a:not(.ui),
+.ui.cards > .card > .content a:not(.ui) {
+  color: deepskyblue;
+  transition: color 0.1s ease !important;
+  transition-property: color !important;
+  transition-duration: 0.1s !important;
+  transition-timing-function: ease !important;
+  transition-delay: 0s !important;
+}
+
+.ui.card > .extra,
+.ui.cards > .card > .extra {
+  background-color: paleturquoise !important;
+}
+
+.ui.tabular.menu .active.item {
+  background-color: rgb(138, 248, 138) !important;
+}
+
+.ui.card > .content p:last-child,
+.ui.cards > .card > .content p:last-child {
+  margin-bottom: 0 !important;
+  width: max-content !important;
+  float: right !important;
+}
+
+div.ui.card {
+  display: inline-block !important;
+  margin: 0.5em !important;
+}
+
+p:last-child {
+  margin-bottom: 0 !important;
+  text-align: center !important;
+  text-transform: capitalize !important;
+}
+
+.ui.segment:last-child {
+  margin-bottom: 0;
+  /* background-image: linear-gradient(rgb(108, 163, 253), rgb(138, 248, 138)); */
+  background-color: #1b1c1d !important;
+}
+h2:last-child {
+  color: aliceblue !important;
+  text-transform: capitalize !important;
+}

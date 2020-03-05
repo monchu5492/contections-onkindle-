@@ -7,7 +7,7 @@ const INITIAL_STATE = {
   links: "",
   description: "",
   address: "",
-  user: []
+  user: null
   //    owner_id: ""
 };
 export default class CreateEventForm extends React.Component {
@@ -27,7 +27,7 @@ export default class CreateEventForm extends React.Component {
     e.preventDefault();
     this.close();
     console.log(this.state);
-    this.props.postEvent(this.state);
+    this.props.postEvent({ ...this.state, user: this.props.user });
     this.setState(INITIAL_STATE);
   };
   render() {
@@ -37,7 +37,7 @@ export default class CreateEventForm extends React.Component {
       <div>
         <Button
           onClick={this.closeConfigShow(false, true)}
-          color="green"
+          color="orange"
           inverted
         >
           Create an Event

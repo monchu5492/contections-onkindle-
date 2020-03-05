@@ -26,7 +26,7 @@ export default class MenuExampleTabularOnTop extends Component {
     console.log(this.props);
     if (window.confirm("Are you sure you want to logout?") === true) {
       localStorage.clear();
-      return this.props.logOut();
+      return this.props.logOut(), this.props.history.push("/");
       //supposed to redirect to home page as well as removing user from local state
     }
   };

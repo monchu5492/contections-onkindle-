@@ -53,8 +53,8 @@ export default class MenuExampleSecondaryPointing extends Component {
           <Image
             src={this.props.user.profile_pic}
             alt="none"
-            size="medium"
-            style={{ width: "max-content", margin: "auto" }}
+            size="small"
+            style={{ margin: "auto" }}
             circular
           />
           <CreateEventForm
