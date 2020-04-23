@@ -1,4 +1,8 @@
 import "./App.css";
+import 'semantic-ui-css/semantic.min.css';
+//import '../semantic/out/semantic.min.js';
+//import '../semantic/out/semantic.min.css';
+//import '../semantic/out/semantic.css';
 import React from "react";
 import HomepageLayout from "./HomepageLayout";
 import LoginForm from "./LoginForm";
