@@ -19,23 +19,27 @@ export default class CardExampleGroups extends React.Component {
   // };
 
   render() {
-    const eventMakerId = this.props.currentEvent.user.id;
-    console.log(eventMakerId);
+    // const eventMakerId = this.props.currentEvent.user.id;
+    // console.log(eventMakerId);
     console.log(this.props.user.id);
     // const eventMaker =
     return (
-      <Card>
+      <Card style={{ marginRight: "10%" }}>
         {console.log(this.props.currentEvent, "currentEvent card props")}
-        <Card.Content>
-          <Image
-            floated="right"
-            size="mini"
-            src={this.props.currentEvent.picture}
-          />
+        <Card.Content
+          textAlign="center"
+          style={{
+            backgroundImage: `url(${this.props.currentEvent.picture})`,
+            backgroundSize: "cover",
+            height: "-webkit-fill-available",
+          }}
+        >
           <Card.Header>
             Event Created By {this.props.currentEvent.user.user_name}
           </Card.Header>
-          <Card.Meta>{this.props.currentEvent.name} project</Card.Meta>
+          <Card.Meta style={{ marginTop: "10px" }}>
+            {this.props.currentEvent.name} project
+          </Card.Meta>
           <Card.Description>
             {/* <Link exact to={this.props.currentEvent.links}>
               Link
@@ -51,6 +55,7 @@ export default class CardExampleGroups extends React.Component {
                 user={this.props.user}
                 currentEvent={this.props.currentEvent}
                 joinEvent={this.props.joinEvent}
+                eventChange={this.props.eventChange}
               />
             ) : (
               <EditEventForm
