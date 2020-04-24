@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Input, Menu, Segment, Card } from "semantic-ui-react";
+import { Input, Menu, Segment, Card, Grid } from "semantic-ui-react";
 import { Link, Redirect } from "react-router-dom";
 import EventCard from "./EventCard";
 import CreateEventForm from "./CreateEventForm";
@@ -9,7 +9,7 @@ import HomepageLayout from "./HomepageLayout";
 export default class MenuExampleTabularOnTop extends Component {
   state = {
     activeItem: "events",
-    currentUserEvents: []
+    currentUserEvents: [],
   };
 
   handleItemClick = (e, { name }) => {
@@ -31,104 +31,177 @@ export default class MenuExampleTabularOnTop extends Component {
     }
   };
 
-  // eventMaker = () => {
-  //   console.log(this.props.currentEvent);
-  //   let eventId = this.props.currentEvent.user_id;
-  //   return this.props.users.filter(user => {
-  //     return user.id == eventId;
-  //   });
-  // };
-
-  // switchCase() {
-  //   // if (this.props.owned_events.length < 1) {
-  //   // return <h2>Currently no events, feel free to create one</h2>;
-  //   // } else
-  //   if (this.state.activeItem === "all events") {
-  //     this.props.allEvents.map(event => {
-  //       return (
-  //         <EventCard
-  //           user={this.props.user}
-  //           allEvents={this.props.allEvents}
-  //           currentEvent={event}
-  //           deleteEvent={this.props.deleteEvent}
-  //           updateEvent={this.props.updateEvent}
-  //           joinEvent={this.props.joinEvent}
-  //           allEvents={this.props.allEvents}
-  //         />
-  //       );
-  //     });
-  //   } else if (this.state.activeItem === "bio") {
+  // eventGridFuntion = () => {
+  //   let ownedEvents = this.props.allEvents.filter(
+  //     (event) => event.user.id === this.props.user.id
+  //   );
+  //   console.log(ownedEvents);
+  //   let variab = ownedEvents;
+  //   if (
+  //     (ownedEvents.length === 0 && this.state.activeItem === "events") ||
+  //     this.state.activeItem === "all events"
+  //   ) {
+  //     console.log("ownedEvents length 0");
   //     return (
-  //       <h3 style={{ width: "max-content" }}>
-  //         {this.props.user ? this.props.user.bio : this.props.localUser().bio}
-  //       </h3>
+  //       this.state.activeItem === "events", (<h3>Please create an event</h3>)
   //     );
   //   } else if (
-  //     this.state.activeItem === "events" &&
-  //     this.props.owned_events.length < 1
+  //     (ownedEvents.length >= 3 && this.state.activeItem === "events") ||
+  //     this.state.activeItem === "all events"
   //   ) {
-  //     this.props.owned_events.map(event => {
+  //     console.log(`ownedEvents length: ${ownedEvents.length}`);
+  //     while (variab.length >= 3) {
+  //       let variab2 = variab.splice(3, 1);
   //       return (
-  //         <EventCard
-  //           user={this.props.user}
-  //           owned_events={this.props.owned_events}
-  //           currentEvent={event}
-  //           deleteEvent={this.props.deleteEvent}
-  //           updateEvent={this.props.updateEvent}
-  //           joinEvent={this.props.joinEvent}
-  //         />
+  //         <Grid>
+  //           <Grid.Row columns={3}>
+  //             {variab2.map((thisevent) => {
+  //               return (
+  //                 <Grid.Column>
+  //                   <EventCard
+  //                     user={this.props.user}
+  //                     users={this.props.users}
+  //                     history={this.props.history}
+  //                     allEvents={this.props.allEvents}
+  //                     currentEvent={thisevent}
+  //                     deleteEvent={this.props.deleteEvent}
+  //                     updateEvent={this.props.updateEvent}
+  //                     joinEvent={this.props.joinEvent}
+  //                   />
+  //                 </Grid.Column>
+  //               );
+  //             })}
+  //           </Grid.Row>
+  //         </Grid>
   //       );
-  //     });
-  //   } else {
-  //     return <h2>Currently no events, feel free to create one</h2>;
+  //     }
   //   }
-  // }
+  //   return (
+  //     <Grid>
+  //       <Grid.Row columns={variab.length}>
+  //         {variab.map((thisevent) => {
+  //           return (
+  //             <Grid.Column>
+  //               <EventCard
+  //                 user={this.props.user}
+  //                 users={this.props.users}
+  //                 history={this.props.history}
+  //                 allEvents={this.props.allEvents}
+  //                 currentEvent={thisevent}
+  //                 deleteEvent={this.props.deleteEvent}
+  //                 updateEvent={this.props.updateEvent}
+  //                 joinEvent={this.props.joinEvent}
+  //               />
+  //             </Grid.Column>
+  //           );
+  //         })}
+  //       </Grid.Row>
+  //     </Grid>
+  //   );
+  // };
+
+  // eventMenuTab = () => {
+  //   let ownedEvents = this.props.allEvents.filter(
+  //     (event) => event.user.id === this.props.user.id
+  //   );
+  //   console.log(ownedEvents);
+  //   if (ownedEvents.length === 0) {
+  //     return (
+  //       this.state.activeItem === "events", (<h3>Please create an event</h3>)
+  //     );
+  //   } else {
+  //      this.state.activeItem === "events"
+  //       ? let variab = ownedEvents;
+  //       while (variab.length >= 3) {
+  //         let variab2 = variab.splice(3, 1);
+  //         return (
+  //           <Grid>
+  //             <Grid.Row columns={3}>
+  //               {variab2.map((thisevent) => {
+  //                 <Grid.Column>
+  //                   <EventCard eachEvent={thisevent} />
+  //                 </Grid.Column>;
+  //               })}
+  //             </Grid.Row>
+  //           </Grid>
+  //         );
+  //       }
+  //       return (
+  //         <Grid>
+  //           <Grid.Row columns={variab.length}>
+  //             {variab.map((thisevent) => {
+  //               <Grid.Column>
+  //                 <EventCard eachEvent={thisevent} />
+  //               </Grid.Column>;
+  //             })}
+  //           </Grid.Row>
+  //         </Grid>
+  //       );
+  //       : null;
+  //   }
+  // };
+
+  eventChange = (event) => {
+    if (event) {
+      this.setState({ currentUserEvents: event });
+    }
+  };
 
   eventMenuTab = () => {
     let ownedEvents = this.props.allEvents.filter(
-      event => event.user.id === this.props.user.id
+      (event) => event.user.id === this.props.user.id
     );
-    console.log(ownedEvents);
-    return this.state.activeItem === "events"
-      ? ownedEvents.map(event => {
-          return (
-            <EventCard
-              user={this.props.user}
-              users={this.props.users}
-              history={this.props.history}
-              allEvents={this.props.allEvents}
-              currentEvent={event}
-              deleteEvent={this.props.deleteEvent}
-              updateEvent={this.props.updateEvent}
-              joinEvent={this.props.joinEvent}
-            />
-          );
-        })
-      : null;
+    // let ownedEvents = this.props.owned_events;
+    if (ownedEvents.length === 0 && this.state.activeItem === "events") {
+      return (
+        this.state.activeItem === "events", (<h3>Please create an event</h3>)
+      );
+    } else {
+      return this.state.activeItem === "events"
+        ? ownedEvents.map((event) => {
+            return (
+              <EventCard
+                user={this.props.user}
+                users={this.props.users}
+                history={this.props.history}
+                allEvents={this.props.allEvents}
+                currentEvent={event}
+                deleteEvent={this.props.deleteEvent}
+                updateEvent={this.props.updateEvent}
+                joinEvent={this.props.joinEvent}
+                eventChange={this.eventChange}
+              />
+            );
+          })
+        : null;
+    }
   };
 
   allEventMenuTab = () => {
-    // const nonUserEvents = this.props.allEvents.filter(
-    //   event => event.user.id != this.props.user.id
-    // );
-    console.log(this.props.user);
-    // console.log(nonUserEvents);
-    return this.state.activeItem === "all events"
-      ? this.props.allEvents.map(event => {
-          return (
-            <EventCard
-              user={this.props.user}
-              users={this.props.users}
-              history={this.props.history}
-              currentEvent={event}
-              deleteEvent={this.props.deleteEvent}
-              updateEvent={this.props.updateEvent}
-              joinEvent={this.props.joinEvent}
-              allEvents={this.props.allEvents}
-            />
-          );
-        })
-      : null;
+    let nonOwnedEvents = this.props.allEvents.filter(
+      (event) => event.user.id !== this.props.user.id
+    );
+    // let ownedEvents = this.props.owned_events;
+    if (nonOwnedEvents) {
+      console.log(nonOwnedEvents);
+      return this.state.activeItem === "all events"
+        ? nonOwnedEvents.map((event) => {
+            return (
+              <EventCard
+                user={this.props.user}
+                users={this.props.users}
+                history={this.props.history}
+                currentEvent={event}
+                deleteEvent={this.props.deleteEvent}
+                updateEvent={this.props.updateEvent}
+                joinEvent={this.props.joinEvent}
+                allEvents={this.props.allEvents}
+                eventChange={this.eventChange}
+              />
+            );
+          })
+        : null;
+    }
   };
 
   bioMenuTab = () => {
@@ -172,83 +245,23 @@ export default class MenuExampleTabularOnTop extends Component {
               active={activeItem === "Logout"}
               onClick={this.handleItemClick}
             />
-            <Menu.Item>
+            {/* <Menu.Item>
               <Input
                 transparent
                 icon={{ name: "search", link: true }}
                 placeholder="Search users..."
               />
-            </Menu.Item>
+            </Menu.Item> */}
           </Menu.Menu>
         </Menu>
-        <Segment attached="bottom">
+        <Segment attached="bottom" textAlign="center">
           {this.allEventMenuTab()}
+          {/* {this.eventGridFuntion()} */}
           {this.bioMenuTab()}
           {this.eventMenuTab()}
           {this.props.owned_events.length >= 1 ? this.noEvent : null}
-          {/* {this.switchCase()} */}
-          {/* {this.state.activeItem === "events" ? (
-            this.props.owned_events.length >= 1 ? (
-              this.props.owned_events.map(event => {
-                return (
-                  <EventCard
-                    user={this.props.user}
-                    owned_events={this.props.owned_events}
-                    currentEvent={event}
-                    deleteEvent={this.props.deleteEvent}
-                    updateEvent={this.props.updateEvent}
-                    joinEvent={this.props.joinEvent}
-                  />
-                );
-              })
-            ) : (
-              <h2>Currently no events, feel free to create one</h2>
-            )
-          ) : (
-            <h3 style={{ width: "max-content" }}>
-              {this.props.user
-                ? this.props.user.bio
-                : this.props.localUser().bio}
-            </h3>
-          )}
-          {this.state.activeItem === "all events"
-            ? this.props.allEvents.map(event => {
-                return (
-                  <EventCard
-                    user={this.props.user}
-                    allEvents={this.props.allEvents}
-                    currentEvent={event}
-                    deleteEvent={this.props.deleteEvent}
-                    updateEvent={this.props.updateEvent}
-                    joinEvent={this.props.joinEvent}
-                    allEvents={this.props.allEvents}
-                  />
-                );
-              })
-            : null} */}
         </Segment>
       </div>
     );
   }
 }
-
-// {
-//   this.state.activeItem === " All Events" ? (
-//     this.props.allEvents.map(event => {
-//       return (
-//         <EventCard
-//           user={this.props.user}
-//           allEvents={this.props.allEvents}
-//           currentEvent={event}
-//           deleteEvent={this.props.deleteEvent}
-//           updateEvent={this.props.updateEvent}
-//           joinEvent={this.props.joinEvent}
-//         />
-//       );
-//     })
-//   ) : (
-//     <h4 style={{ width: "max-content" }}>
-//       {this.props.user ? this.props.user.bio : this.props.localUser().bio}
-//     </h4>
-//   );
-// }
