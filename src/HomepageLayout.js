@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import LoginForm from "./LoginForm";
 // export default class HomepageLayout extends Component {
 import PropTypes from "prop-types";
 import React, { Component } from "react";
@@ -15,7 +16,7 @@ import {
   Responsive,
   Segment,
   Sidebar,
-  Visibility
+  Visibility,
 } from "semantic-ui-react";
 
 // Heads up!
@@ -41,7 +42,7 @@ const HomepageHeading = ({ mobile }) => (
         fontSize: mobile ? "2em" : "4em",
         fontWeight: "normal",
         marginBottom: 0,
-        marginTop: mobile ? "1.5em" : "3em"
+        marginTop: mobile ? "1.5em" : "3em",
       }}
     />
     <Header
@@ -51,7 +52,7 @@ const HomepageHeading = ({ mobile }) => (
       style={{
         fontSize: mobile ? "1.5em" : "1.7em",
         fontWeight: "normal",
-        marginTop: mobile ? "0.5em" : "1.5em"
+        marginTop: mobile ? "0.5em" : "1.5em",
       }}
     />
     {/* <Button primary size="huge">
@@ -62,7 +63,7 @@ const HomepageHeading = ({ mobile }) => (
 );
 
 HomepageHeading.propTypes = {
-  mobile: PropTypes.bool
+  mobile: PropTypes.bool,
 };
 
 /* Heads up!
@@ -91,7 +92,7 @@ class DesktopContainer extends Component {
             textAlign="center"
             style={{
               minHeight: 700,
-              padding: "1em 0em"
+              padding: "1em 0em",
             }}
             vertical
           >
@@ -108,25 +109,23 @@ class DesktopContainer extends Component {
                   Profile
                 </Menu.Item>
                 <Menu.Item as="a">Company</Menu.Item>
-                {this.props.isLoggedIn ? null : (
-                  <Menu.Item position="right">
-                    <Link to="/login">
-                      <Button as="a" inverted={!fixed}>
-                        Log in
-                      </Button>
-                    </Link>
-                    <Link to="/signup">
-                      <Button
-                        as="a"
-                        inverted={!fixed}
-                        primary={fixed}
-                        style={{ marginLeft: "0.5em" }}
-                      >
-                        Sign Up
-                      </Button>
-                    </Link>
-                  </Menu.Item>
-                )}
+                <Menu.Item position="right">
+                  <Link to="/login">
+                    <Button as="a" inverted={!fixed}>
+                      Log in
+                    </Button>
+                  </Link>
+                  <Link to="/signup">
+                    <Button
+                      as="a"
+                      inverted={!fixed}
+                      primary={fixed}
+                      style={{ marginLeft: "0.5em" }}
+                    >
+                      Sign Up
+                    </Button>
+                  </Link>
+                </Menu.Item>
               </Container>
             </Menu>
             <HomepageHeading />
@@ -140,7 +139,7 @@ class DesktopContainer extends Component {
 }
 
 DesktopContainer.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 class MobileContainer extends Component {
@@ -171,10 +170,11 @@ class MobileContainer extends Component {
           <Menu.Item as="a" active>
             Home
           </Menu.Item>
+          <Menu.Item>Company</Menu.Item>
           <Menu.Item as={Link} to={"/profile"}>
             Profile
           </Menu.Item>
-          <Menu.Item>Company</Menu.Item>
+          <Menu.Item as="a">Profile</Menu.Item>
           <Menu.Item as={Link} to="/login">
             Log in
           </Menu.Item>
@@ -188,7 +188,7 @@ class MobileContainer extends Component {
             textAlign="center"
             style={{
               minHeight: 350,
-              padding: "1em 0em"
+              padding: "1em 0em",
             }}
             vertical
           >
@@ -223,7 +223,7 @@ class MobileContainer extends Component {
 }
 
 MobileContainer.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 const ResponsiveContainer = ({ children }) => (
@@ -234,7 +234,7 @@ const ResponsiveContainer = ({ children }) => (
 );
 
 ResponsiveContainer.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 const HomepageLayout = () => (
@@ -270,11 +270,11 @@ const HomepageLayout = () => (
             />
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row>
+        {/* <Grid.Row>
           <Grid.Column textAlign="center">
             <Button size="huge">Check Them Out</Button>
           </Grid.Column>
-        </Grid.Row>
+        </Grid.Row> */}
       </Grid>
     </Segment>
 
@@ -316,7 +316,6 @@ const HomepageLayout = () => (
         <Button as="a" size="large">
           Read More
         </Button>
-
         <Divider
           as="h4"
           className="header"
@@ -325,7 +324,6 @@ const HomepageLayout = () => (
         >
           <a href="#">Case Studies</a>
         </Divider>
-
         <Header as="h3" style={{ fontSize: "2em" }}>
           Did We Tell You About Our Bananas?
         </Header>
