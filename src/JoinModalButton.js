@@ -11,10 +11,13 @@ export default class JoinModalButton extends React.Component {
   };
   close = () => this.setState({ open: false });
   //-------------------------------------------
-  handleOnClick = e => {
-    console.log(this.props.currentEvent);
+  handleOnClick = (e) => {
     // this.props.closeFirstModal();
-    this.props.joinEvent(this.props.currentEvent);
+    this.props.joinEvent(
+      this.props.currentEvent,
+      console.log("HIT JOIN EVENT!!", this.props.currentEvent)
+    );
+    this.props.eventChange(this.props.currentEvent);
     this.close();
   };
 
@@ -39,11 +42,12 @@ export default class JoinModalButton extends React.Component {
           <Modal.Content image>
             <Image wrapped size="small" src={this.props.currentEvent.picture} />
             <Modal.Description>
+              {console.log(this.props.currentEvent)}
               <Header>{this.props.currentEvent.name}</Header>
               <p>{this.props.currentEvent.address}</p>
               <Link>{this.props.currentEvent.links}</Link>
               <p>{this.props.currentEvent.description}</p>
-              <p>{this.props.user.name}</p>
+              <p>{this.props.currentEvent.user.user_name}</p>
             </Modal.Description>
           </Modal.Content>
           <Modal.Actions>
